@@ -52,8 +52,12 @@ async def main():
                 {
                     "url": i["url"],
                     "status_code": i["result"]["statusCode"],
-                    "total_time": f'{i["result"]["timings"]["total"]}ms',
-                    "probe_location": f'{i["probe"]["city"].capitalize()}, {pycountry.countries.get(alpha_2=i["probe"]["country"]).name}, {i["probe"]["continent"]}',
+                    "total_time_ms": i["result"]["timings"]["total"],
+                    "probe_location": "{}, {}, {}".format(
+                        i["probe"]["city"].capitalize(),
+                        pycountry.countries.get(alpha_2=i["probe"]["country"]).name,
+                        i["probe"]["continent"],
+                    ),
                 },
                 indent=4,
             )
