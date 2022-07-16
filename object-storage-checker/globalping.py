@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from enum import Enum
 from functools import cache
+
 import requests
 
 DOMAIN_NAME = "api.globalping.io"

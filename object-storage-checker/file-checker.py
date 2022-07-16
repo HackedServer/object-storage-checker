@@ -2,7 +2,7 @@ import asyncio
 import json
 import os
 from urllib.parse import urlparse
-
+from s3_url import get_url
 import aiohttp
 import pycountry
 import yaml
@@ -36,14 +36,19 @@ async def check_file(url: str, continent: str, session: aiohttp.ClientSession) -
 async def main():
     test_files: list[dict[str, str]] = []
     for file in os.listdir("./data/"):
-        if file.endswith(".yaml"):
+        if file.endswith(".yaml") and file.startswith("wasabi"):
             with open(os.path.join(".", "data", file)) as f:
                 data = yaml.safe_load(f)
                 for i in data["files"]:
                     test_files.append({**i, **data["provider"]})
 
     session = aiohttp.ClientSession()
-    coros = [check_file(file["url"], file["region"]["continent"], session) for file in test_files]
+    coros = [
+        check_file(
+            file["url"] if file.get("url") else await get_url(file["object"]), file["region"]["continent"], session
+        )
+        for file in test_files
+    ]
 
     for completed in asyncio.as_completed(coros):
         i = await completed

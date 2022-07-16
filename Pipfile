@@ -8,6 +8,7 @@ pyyaml = "*"
 requests = "*"
 aiohttp = "==3.8.1"
 pycountry = "*"
+aioboto3 = "*"
 
 [dev-packages]
 black = "*"

@@ -1,0 +1,28 @@
+---
+provider:
+  company: "Example Company"
+  service: "Example Cloud Platform"
+  product: "Example Object Storage"
+files:
+  - type: "presign"
+    region:
+      continent: "NA"
+      country: "US"
+      state: "Optional Example"
+      city: "Optional Example Town"
+    object:
+      bucket: "example-bucket"
+      key: "example-file.txt"
+      endpoint_url: "https://storage.objectendpoint.example"
+      access_key: "EXAMPLE_ACCESS_KEY"
+      secret_key: "EXAMPLE_SECRET_KEY"
+      region: "us-example-1"
+  - type: "direct"
+    region:
+      continent: "NA"
+      country: "US"
+      state: "Optional Example"
+      city: "Optional Example Town"
+    object:
+      url: "https://direct-link.storage.objectendpoint.example/example-file.txt"
+      region: "us-example-1"
