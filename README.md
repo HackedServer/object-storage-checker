@@ -42,6 +42,11 @@ In time this script will log this data and have graphs, etc.
 | US | NA |  | us-west-001 | https://s3.us-west-001.backblazeb2.com |
 | NL | EU | Amsterdam | eu-central-003 | https://s3.eu-central-003.backblazeb2.com |
 
+## Cloudflare - Cloudflare - R2
+| Country | Continent | City, State | Region | S3 Endpoint |
+|---|---|---|---|---|
+| Global | NA |  | auto | https://634d2993234c9eeb2905ddb98de372e5.r2.cloudflarestorage.com |
+
 ## iDrive - iDrive - e2
 | Country | Continent | City, State | Region | S3 Endpoint |
 |---|---|---|---|---|
