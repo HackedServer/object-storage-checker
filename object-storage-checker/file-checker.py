@@ -28,7 +28,9 @@ async def check_file(url: str, continent: str, session: aiohttp.ClientSession) -
         async with session.get(f"https://{gp.DOMAIN_NAME}{gp.ApiPath.MEASUREMENTS.value}/{request_id}") as response:
             r = await response.json()
             if r["status"] == gp.Status.FINISHED.value:
-                return r["results"][0] | {"url": url}
+                # if "ETIMEDOUT" in r["results"][0]["result"]["rawOutput"]:
+                #    raise Exception("CaughtTimeout")
+                return {"url": url} | r["results"][0]
             else:
                 await asyncio.sleep(1)
 
@@ -36,7 +38,7 @@ async def check_file(url: str, continent: str, session: aiohttp.ClientSession) -
 async def main():
     test_files: list[dict[str, str]] = []
     for file in os.listdir("./data/"):
-        if file.endswith(".yaml") and file.startswith("wasabi"):
+        if file.endswith(".yaml") and not file == "example.yaml":
             with open(os.path.join(".", "data", file)) as f:
                 data = yaml.safe_load(f)
                 for i in data["files"]:
@@ -45,13 +47,16 @@ async def main():
     session = aiohttp.ClientSession()
     coros = [
         check_file(
-            file["url"] if file.get("url") else await get_url(file["object"]), file["region"]["continent"], session
+            file["object"]["url"] if file["object"].get("url") else await get_url(file["object"]),
+            file["region"]["continent"],
+            session,
         )
         for file in test_files
     ]
 
     for completed in asyncio.as_completed(coros):
         i = await completed
+
         print(
             json.dumps(
                 {
@@ -67,6 +72,7 @@ async def main():
                 indent=4,
             )
         )
+
     await session.close()
 
 
