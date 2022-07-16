@@ -13,28 +13,28 @@ In time this script will log this data and have graphs, etc.
 ## Amazon - Amazon Web Services - S3
 | Country | Continent | City, State | Region | S3 Endpoint |
 |---|---|---|---|---|
-| US | NA |  | us-west-2 | ❓ |
-| US | NA |  | us-east-1 | ❓ |
-| US | NA |  | us-west-1 | ❓ |
-| US | NA |  | us-east-2 | ❓ |
-| BR | SA |  | sa-east-1 | ❓ |
-| SE | EU |  | eu-north-1 | ❓ |
-| FR | EU |  | eu-west-3 | ❓ |
-| UK | EU |  | eu-west-2 | ❓ |
-| IN | AS |  | ap-south-1 | ❓ |
-| JP | AS |  | ap-northeast-3 | ❓ |
-| KR | AS |  | ap-northeast-2 | ❓ |
-| SG | AS |  | ap-southeast-1 | ❓ |
-| AU | OC |  | ap-southeast-2 | ❓ |
-| JP | AS |  | ap-northeast-1 | ❓ |
-| IE | EU |  | eu-west-1 | ❓ |
-| DE | EU |  | eu-central-1 | ❓ |
-| CA | NA |  | ca-central-1 | ❓ |
+| US | NA |  | us-west-2 | :question: |
+| US | NA |  | us-east-1 | :question: |
+| US | NA |  | us-west-1 | :question: |
+| US | NA |  | us-east-2 | :question: |
+| BR | SA |  | sa-east-1 | :question: |
+| SE | EU |  | eu-north-1 | :question: |
+| FR | EU |  | eu-west-3 | :question: |
+| UK | EU |  | eu-west-2 | :question: |
+| IN | AS |  | ap-south-1 | :question: |
+| JP | AS |  | ap-northeast-3 | :question: |
+| KR | AS |  | ap-northeast-2 | :question: |
+| SG | AS |  | ap-southeast-1 | :question: |
+| AU | OC |  | ap-southeast-2 | :question: |
+| JP | AS |  | ap-northeast-1 | :question: |
+| IE | EU |  | eu-west-1 | :question: |
+| DE | EU |  | eu-central-1 | :question: |
+| CA | NA |  | ca-central-1 | :question: |
 
 ## Microsoft - Azure - Blob Storage
 | Country | Continent | City, State | Region | S3 Endpoint |
 |---|---|---|---|---|
-| SE | EU |  | sweden | ❓ |
+| SE | EU |  | sweden | :question: |
 
 ## Backblaze - Backblaze - B2
 | Country | Continent | City, State | Region | S3 Endpoint |
