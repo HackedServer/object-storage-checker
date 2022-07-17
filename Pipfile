@@ -9,9 +9,12 @@ requests = "*"
 aiohttp = "==3.8.1"
 pycountry = "*"
 aioboto3 = "*"
+influxdb-client = {extras = ["ciso"], version = "*"}
 
 [dev-packages]
 black = "*"
+flake8 = "*"
+isort = "*"
 
 [requires]
 python_version = "3.9"
