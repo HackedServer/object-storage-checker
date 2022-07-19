@@ -1,6 +1,6 @@
-import yaml
 import os
 
+import yaml
 
 table_divider = "|---|---|---|---|---|"
 table_row = "| {} | {} | {} | {} | {} |"
