@@ -7,7 +7,7 @@ import aiohttp
 import pycountry
 import yaml
 
-import .globalping as gp
+import globalping as gp
 from s3_url import get_url
 from write_metrics import write_to_influxdb
 
@@ -17,9 +17,10 @@ async def check_file(url: str, continent: str, session: aiohttp.ClientSession) -
     domain = parsed_url.netloc
     path = parsed_url.path
     protocol = parsed_url.scheme
+    query = parsed_url.query
     body = gp.DEFAULT_BODY.copy()
     body["measurement"]["target"] = domain
-    body["measurement"]["query"]["path"] = path
+    body["measurement"]["query"]["path"] = "?".join([path, query])
     body["measurement"]["query"]["protocol"] = protocol
     body["locations"] = [{"type": "continent", "value": continent}]
 
@@ -47,33 +48,40 @@ async def main():
                     test_files.append({**i, **data["provider"]})
 
     session = aiohttp.ClientSession()
-    coros = [
-        check_file(
-            file["object"]["url"] if file["object"].get("url") else await get_url(file["object"]),
-            file["region"]["continent"],
-            session,
-        )
-        for file in test_files
-    ]
+                    
+    async def _get_check_file_params(file: dict[str, str]) -> dict:
+        return {
+            "url": file["object"]["url"] if file["object"].get("url") else await get_url(file["object"]),
+            "continent": file["region"]["continent"],
+            "session": session,
+        }
+    
+    check_file_params = [_get_check_file_params(file) for file in test_files]
+    coros = []
+    for params in asyncio.as_completed(check_file_params):
+        i = await params
+        coros.append(check_file(**i))
+
 
     for completed in asyncio.as_completed(coros):
         i = await completed
-
-        print(
-            json.dumps(
-                {
-                    "url": i["url"],
-                    "status_code": i["result"]["statusCode"],
-                    "total_time_ms": i["result"]["timings"]["total"],
-                    "probe_location": "{}, {}, {}".format(
-                        i["probe"]["city"].capitalize(),
-                        pycountry.countries.get(alpha_2=i["probe"]["country"]).name,
-                        i["probe"]["continent"],
-                    ),
-                },
-                indent=4,
+        if not i["result"]["statusCode"] == 200:
+            print(i["result"]["rawOutput"])
+            print(
+                json.dumps(
+                    {
+                        "url": i["url"],
+                        "status_code": i["result"]["statusCode"],
+                        "total_time_ms": i["result"]["timings"]["total"],
+                        "probe_location": "{}, {}, {}".format(
+                            i["probe"]["city"].capitalize(),
+                            pycountry.countries.get(alpha_2=i["probe"]["country"]).name,
+                            i["probe"]["continent"],
+                        ),
+                    },
+                    indent=4,
+                )
             )
-        )
 
     await session.close()
 

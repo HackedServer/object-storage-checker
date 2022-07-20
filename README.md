@@ -60,6 +60,14 @@ In time this script will log this data and have graphs, etc.
 | US | NA | San Jose, California | us-sj | https://g9u6.sj11.idrivee2-10.com |
 | US | NA | Virginia | us-va | https://g7o1.va12.idrivee2-9.com |
 
+## Oracle - Oracle Cloud - Object Storage
+| Country | Continent | City, State | Region | S3 Endpoint |
+|---|---|---|---|---|
+| US | NA | San Jose, California | us-sanjose-1 | https://axav54powbko.compat.objectstorage.us-sanjose-1.oraclecloud.com |
+| DE | EU | Frankfurt | eu-frankfurt-1 | https://axav54powbko.compat.objectstorage.eu-frankfurt-1.oraclecloud.com |
+| US | NA | Phoenix, Arizona | us-phoenix-1 | https://axav54powbko.compat.objectstorage.us-phoenix-1.oraclecloud.com |
+| UK | EU | Newport | uk-cardiff-1 | https://axav54powbko.compat.objectstorage.uk-cardiff-1.oraclecloud.com |
+
 ## Scaleway - Scaleway - Object Storage
 | Country | Continent | City, State | Region | S3 Endpoint |
 |---|---|---|---|---|

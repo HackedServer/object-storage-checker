@@ -11,7 +11,7 @@ DEFAULT_BODY = {
     "limit": 1,
     "locations": [],
     "measurement": {
-        "query": {"method": "HEAD", "path": "", "protocol": "", "resolver": "74.82.42.42"},
+        "query": {"method": "GET", "path": "", "protocol": "", "resolver": "74.82.42.42"},
         "type": "http",
         "target": "",
     },
