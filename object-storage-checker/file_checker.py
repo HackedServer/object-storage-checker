@@ -9,7 +9,6 @@ import yaml
 
 import globalping as gp
 from s3_url import get_url
-from write_metrics import write_to_influxdb
 
 
 async def check_file(url: str, continent: str, session: aiohttp.ClientSession) -> dict:
@@ -48,20 +47,19 @@ async def main():
                     test_files.append({**i, **data["provider"]})
 
     session = aiohttp.ClientSession()
-                    
+
     async def _get_check_file_params(file: dict[str, str]) -> dict:
         return {
             "url": file["object"]["url"] if file["object"].get("url") else await get_url(file["object"]),
             "continent": file["region"]["continent"],
             "session": session,
         }
-    
+
     check_file_params = [_get_check_file_params(file) for file in test_files]
     coros = []
     for params in asyncio.as_completed(check_file_params):
         i = await params
         coros.append(check_file(**i))
-
 
     for completed in asyncio.as_completed(coros):
         i = await completed

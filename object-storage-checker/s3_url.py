@@ -1,5 +1,7 @@
-import aioboto3
 from asyncio import sleep
+
+import aioboto3
+
 
 async def get_url(object: dict[str, str]) -> str:
     session = aioboto3.Session()
@@ -15,7 +17,7 @@ async def get_url(object: dict[str, str]) -> str:
             Params={"Bucket": object["bucket"], "Key": object["key"]},
             ExpiresIn=1120,
         )
-        
+
         # Sometimes the key doesn't seem to be ready immediately.
-        await sleep(2)  
+        await sleep(2)
         return r
