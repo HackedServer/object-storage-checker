@@ -36,4 +36,4 @@ jobs:
           # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
           pipenv run flake8 . --count --exit-zero --max-complexity=10 --max-line-length=120 --statistics
           pipenv run black . --line-length 120 --target-version py39 --check
-          isort . --check --src object-storage-checker/
+          pipenv run isort . --check --src object-storage-checker/
